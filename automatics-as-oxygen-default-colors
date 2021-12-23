@@ -1,0 +1,19 @@
+// Use for setting Automatic CSS color variables as Oxygen default colors
+// Add in browser dev console, not oxygen
+
+const colors = ["primary","secondary", "accent","base","shade"]
+    const variations = ["medium","hover","light","ultra-light","dark","ultra-dark", "comp"]
+    for(const color of colors){
+        //Add ColorSet by Name
+        const colorUppercase = color.charAt(0).toUpperCase() + color.slice(1);
+        $scope.iframeScope.addNewColorSet(colorUppercase)
+        const colorSetId = $scope.iframeScope.getGlobalColorSetbyName(colorUppercase).id
+
+        //Add color
+        $scope.iframeScope.addNewColor(colorUppercase,colorSetId, `var(--${color})`)
+
+        //Add variations
+        for(const variation of variations){
+            $scope.iframeScope.addNewColor(`${variation}`,colorSetId, `var(--${color}-${variation})`)
+        }
+    }
